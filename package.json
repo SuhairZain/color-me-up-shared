@@ -15,10 +15,14 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "26.0.4",
+    "@types/lodash-es": "4.17.3",
     "husky": "4.2.5",
     "jest": "26.1.0",
     "prettier": "2.0.5",
     "ts-jest": "26.1.1",
     "typescript": "3.9.6"
+  },
+  "dependencies": {
+    "lodash-es": "4.17.15"
   }
 }
