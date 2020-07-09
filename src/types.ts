@@ -7,6 +7,15 @@ export enum Color {
     Pink = "#F15BB5",
 }
 
+export const colors = [
+    Color.Blue,
+    Color.Green,
+    Color.Orange,
+    Color.Pink,
+    Color.Red,
+    Color.Yellow,
+];
+
 export type Tile = {
     color: Color;
     row: number;

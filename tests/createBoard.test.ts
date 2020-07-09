@@ -17,4 +17,13 @@ describe("createBoard", () => {
             });
         });
     });
+
+    test("the origin tile has colors distinct from the adjacent tiles", () => {
+        const board = createBoard(6, 3);
+        const { tiles } = board;
+
+        const originColor = tiles[0][0].color;
+        expect(tiles[0][1].color).not.toBe(originColor);
+        expect(tiles[1][0].color).not.toBe(originColor);
+    });
 });
