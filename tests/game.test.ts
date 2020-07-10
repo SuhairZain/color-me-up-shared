@@ -1,6 +1,6 @@
 import { Board, Color, Tile } from "../src/types";
 
-import { getAdjacentTiles, getConnectedTiles } from "../src/game";
+import { getAdjacentTiles, getConnectedTiles, selectColor } from "../src/game";
 
 type TilePosition = [number, number];
 
@@ -76,6 +76,17 @@ const sourceTileAndAdjacentTiles: [TilePosition, TilePosition[]][] = [
     ],
 ];
 
+const selectColorSteps: { color: Color; expectedConnected: number }[] = [
+    { color: Color.Green, expectedConnected: 2 },
+    { color: Color.Yellow, expectedConnected: 9 },
+    { color: Color.Red, expectedConnected: 11 },
+    { color: Color.Blue, expectedConnected: 12 },
+    { color: Color.Pink, expectedConnected: 13 },
+    { color: Color.Red, expectedConnected: 14 },
+    { color: Color.Green, expectedConnected: 15 },
+    { color: Color.Yellow, expectedConnected: 16 },
+];
+
 const mapToOnlyRowAndColumn = (tile: Tile) => {
     const { column, row } = tile;
 
@@ -88,6 +99,26 @@ const sortTiles = (a: Tile, b: Tile): number => {
     }
 
     return a.column - b.column;
+};
+
+const expectSelectColorWorksAsExpected = (
+    board: Board,
+    colorToSelect: Color,
+    expectedConnected: number
+) => {
+    const updatedBoard = selectColor(board, colorToSelect);
+    const originTile = updatedBoard.tiles[0][0];
+
+    const { connectedTiles } = getConnectedTiles(
+        updatedBoard,
+        originTile,
+        originTile.color,
+        {}
+    );
+
+    expect(connectedTiles.length).toBe(expectedConnected);
+
+    return updatedBoard;
 };
 
 describe("game", () => {
@@ -158,5 +189,15 @@ describe("game", () => {
             { row: 3, column: 0 },
             { row: 3, column: 2 },
         ]);
+    });
+
+    test("selectColor changes the color of tiles connected to origin to the selected color", () => {
+        selectColorSteps.forEach((testCase) => {
+            board = expectSelectColorWorksAsExpected(
+                board,
+                testCase.color,
+                testCase.expectedConnected
+            );
+        });
     });
 });

@@ -1,5 +1,7 @@
 import { Board, Tile, Color } from "./types";
 
+import { deepCopy } from "./utils/objects";
+
 const INDICES_DELTA_FOR_ADJACENT_TILES = [
     [-1, 0],
     [0, -1],
@@ -78,4 +80,22 @@ export const getConnectedTiles = (
             visited: updatedVisited,
         }
     );
+};
+
+export const selectColor = (board: Board, color: Color) => {
+    const updatedBoard = deepCopy(board);
+
+    const originTile = updatedBoard.tiles[0][0];
+    const { connectedTiles } = getConnectedTiles(
+        updatedBoard,
+        originTile,
+        originTile.color,
+        {}
+    );
+
+    connectedTiles.forEach((tile) => {
+        tile.color = color;
+    });
+
+    return updatedBoard;
 };
