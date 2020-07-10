@@ -1,6 +1,6 @@
 import { Board, Color, Tile } from "../src/types";
 
-import { getAdjacentTiles } from "../src/game";
+import { getAdjacentTiles, getConnectedTiles } from "../src/game";
 
 type TilePosition = [number, number];
 
@@ -136,5 +136,27 @@ describe("game", () => {
                 }))
             );
         });
+    });
+
+    test("getConnectedTiles returns the correct tiles", () => {
+        const connectedTiles = getConnectedTiles(
+            board,
+            board.tiles[1][1],
+            board.tiles[1][1].color,
+            {}
+        );
+        expect(
+            connectedTiles.connectedTiles
+                .sort(sortTiles)
+                .map(mapToOnlyRowAndColumn)
+        ).toEqual([
+            { row: 1, column: 1 },
+            { row: 2, column: 0 },
+            { row: 2, column: 1 },
+            { row: 2, column: 2 },
+            { row: 2, column: 3 },
+            { row: 3, column: 0 },
+            { row: 3, column: 2 },
+        ]);
     });
 });
