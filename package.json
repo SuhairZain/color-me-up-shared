@@ -1,6 +1,6 @@
 {
   "name": "color-me-up-shared",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Project made as part of the hiring process for EverReal.",
   "main": "dist/index.js",
   "scripts": {
