@@ -2,8 +2,9 @@
   "name": "color-me-up-shared",
   "version": "0.0.1",
   "description": "Project made as part of the hiring process for EverReal.",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
+    "build": "rimraf build && tsc --declaration --outDir build src/index.ts && webpack",
     "test": "jest"
   },
   "husky": {
@@ -14,13 +15,18 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@babel/preset-typescript": "7.10.4",
     "@types/jest": "26.0.4",
     "@types/lodash-es": "4.17.3",
+    "babel-loader": "8.1.0",
     "husky": "4.2.5",
     "jest": "26.1.0",
     "prettier": "2.0.5",
+    "rimraf": "3.0.2",
     "ts-jest": "26.1.1",
-    "typescript": "3.9.6"
+    "typescript": "3.9.6",
+    "webpack": "4.43.0",
+    "webpack-cli": "3.3.12"
   },
   "dependencies": {
     "lodash-es": "4.17.15"
