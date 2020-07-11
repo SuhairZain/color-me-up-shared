@@ -1,6 +1,12 @@
 import { Board, Color, Tile } from "../src/types";
 
-import { getAdjacentTiles, getConnectedTiles, selectColor } from "../src/game";
+import {
+    getAdjacentTiles,
+    getConnectedTiles,
+    selectColor,
+    gameWon,
+    getNumberOfTilesConnectedToOrigin,
+} from "../src/game";
 
 type TilePosition = [number, number];
 
@@ -199,5 +205,29 @@ describe("game", () => {
                 testCase.expectedConnected
             );
         });
+    });
+
+    test("getNumberOfTilesConnectedToOrigin returns the number of tiles connected to origin", () => {
+        expect(getNumberOfTilesConnectedToOrigin(board)).toBe(1);
+
+        selectColorSteps.forEach((testCase) => {
+            board = selectColor(board, testCase.color);
+            expect(getNumberOfTilesConnectedToOrigin(board)).toBe(
+                testCase.expectedConnected
+            );
+        });
+
+        expect(getNumberOfTilesConnectedToOrigin(board)).toBe(
+            Math.pow(board.tiles.length, 2)
+        );
+    });
+
+    test("gameWon returns true only when all the tiles are connected", () => {
+        selectColorSteps.forEach((testCase) => {
+            expect(gameWon(board)).toBe(false);
+            board = selectColor(board, testCase.color);
+        });
+
+        expect(gameWon(board)).toBe(true);
     });
 });

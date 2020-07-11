@@ -99,3 +99,17 @@ export const selectColor = (board: Board, color: Color) => {
 
     return updatedBoard;
 };
+
+export const getNumberOfTilesConnectedToOrigin = (board: Board) => {
+    const originTile = board.tiles[0][0];
+
+    return getConnectedTiles(board, originTile, originTile.color, {})
+        .connectedTiles.length;
+};
+
+export const gameWon = (board: Board) => {
+    return (
+        getNumberOfTilesConnectedToOrigin(board) ===
+        Math.pow(board.tiles[0].length, 2)
+    );
+};
