@@ -2,10 +2,11 @@
   "name": "color-me-up-shared",
   "version": "0.0.1",
   "description": "Project made as part of the hiring process for EverReal.",
-  "main": "build/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "rimraf build && tsc --declaration --outDir build src/index.ts && webpack",
-    "test": "jest"
+    "build": "rimraf dist && tsc --declaration --outDir dist src/index.ts && webpack",
+    "test": "jest",
+    "version": "yarn build && git add dist"
   },
   "husky": {
     "hooks": {
