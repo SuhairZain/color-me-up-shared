@@ -7,3 +7,5 @@ export {
 } from "./game";
 
 export { createBoard } from "./createBoard";
+
+export { playGame } from "./automatedAgent";
